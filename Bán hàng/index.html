@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phát Đạt - Trải Nghiệm Ẩm Thực</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <h1>Phát Đạt</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="#menu">Thực đơn</a></li>
+                <li><a href="cart.html">Giỏ hàng (<span id="cart-count">0</span>)</a></li>
+                <li id="auth-menu"><a href="login.html" id="login-btn">Đăng nhập / Đăng ký</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <!-- Banner giới thiệu -->
+        <section class="banner">
+            <h2>Chào mừng đến với Quán Ăn Phát Đạt</h2>
+            <p>Hương vị đậm đà - Phục vụ tận tâm</p>
+        </section>
+
+        <!-- Khu vực tìm kiếm & Lọc (Dành cho Lợi code JS) -->
+        <section class="search-filter-section">
+            <input type="text" id="search-name" placeholder="Tìm tên món ăn...">
+            <select id="filter-category">
+                <option value="all">Tất cả danh mục</option>
+                <option value="Khai vi">Khai vị & Điểm tâm</option>
+                <option value="Mon nuoc">Món Nước</option>
+                <option value="Com">Cơm</option>
+                <option value="Mi">Mì & Mì Ý</option>
+            </select>
+            <input type="number" id="min-price" placeholder="Giá từ...">
+            <input type="number" id="max-price" placeholder="Đến giá...">
+            <button id="btn-search">Tìm kiếm nâng cao</button>
+        </section>
+
+        <!-- Khu vực hiển thị danh sách sản phẩm -->
+        <section id="menu" class="menu-section">
+            <h3 class="section-title">Thực Đơn Của Chúng Tôi</h3>
+            <!-- Lợi sẽ dùng JS render danh sách món ăn vào div này -->
+            <div id="product-list" class="product-grid"></div>
+
+            <!-- Khu vực Phân trang -->
+            <div id="pagination" class="pagination-container"></div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <h3>Quán Ăn Phát Đạt</h3>
+            <p><strong>Địa chỉ:</strong> 273 Kinh Dương Vương, Phường Chợ Quán, TP. HCM</p>
+            <p><strong>Hotline:</strong> 0123 456 789</p>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Đồ án Lập trình Web - Nhóm 6969.</p>
+        </div>
+    </footer>
+
+    <!-- File JS khởi tạo dữ liệu mẫu -->
+    <script src="initData.js"></script>
+    <!-- File JS xử lý nghiệp vụ chung -->
+    <script src="main.js"></script>
+</body>
+</html>

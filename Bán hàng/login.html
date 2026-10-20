@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập / Đăng ký - Phát Đạt</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS riêng cho trang đăng nhập/đăng ký */
+        .auth-container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: #1f1f1f;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+            .auth-tabs button {
+                flex: 1;
+                padding: 10px;
+                border: none;
+                background: #2b2b2b;
+                color: #f1f1f1;
+                cursor: pointer;
+                font-weight: bold;
+            }
+
+                .auth-tabs button.active {
+                    background: #C0392B;
+                    color: #fff;
+                }
+
+        .auth-form {
+            display: none;
+        }
+
+            .auth-form.active {
+                display: block;
+            }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+
+            .form-group input {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #444;
+                background: #2b2b2b;
+                color: #f1f1f1;
+                border-radius: 4px;
+            }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background: #27AE60;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+            .btn-submit:hover {
+                background: #219150;
+            }
+
+        .error-msg {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1><a href="index.html" style="color: white; text-decoration: none;">Phát Đạt</a></h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="auth-container">
+            <div class="auth-tabs">
+                <button id="tab-login" class="active" onclick="switchTab('login')">Đăng Nhập</button>
+                <button id="tab-register" onclick="switchTab('register')">Đăng Ký</button>
+            </div>
+
+            <!-- FORM ĐĂNG NHẬP -->
+            <form id="form-login" class="auth-form active" onsubmit="handleLogin(event)">
+                <div id="login-error" class="error-msg"></div>
+                <div class="form-group">
+                    <label>Tên đăng nhập:</label>
+                    <input type="text" id="login-username" required>
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu:</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn-submit">ĐĂNG NHẬP</button>
+            </form>
+
+            <!-- FORM ĐĂNG KÝ -->
+            <form id="form-register" class="auth-form" onsubmit="handleRegister(event)">
+                <div id="register-error" class="error-msg"></div>
+                <div class="form-group">
+                    <label>Họ và tên:</label>
+                    <input type="text" id="reg-fullname" required>
+                </div>
+                <div class="form-group">
+                    <label>Số điện thoại:</label>
+                    <input type="tel" id="reg-phone" required pattern="[0-9]{10}" title="Vui lòng nhập 10 chữ số">
+                </div>
+                <div class="form-group">
+                    <label>Tên đăng nhập:</label>
+                    <input type="text" id="reg-username" required>
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu:</label>
+                    <input type="password" id="reg-password" required minlength="3">
+                </div>
+                <button type="submit" class="btn-submit">ĐĂNG KÝ NGAY</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- File JS xử lý logic đăng nhập/đăng ký -->
+    <script src="auth.js"></script>
+</body>
+</html>
