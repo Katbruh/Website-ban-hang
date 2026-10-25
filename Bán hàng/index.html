@@ -41,10 +41,10 @@
                 <option value="Mi">Mì & Mì Ý</option>
             </select>
 
-            <!-- Khung giá từ (Có hỗ trợ gõ & xổ xuống chọn mức giá sạch sẽ) -->
-            <input type="text" id="min-price" placeholder="Giá từ..." list="min-price-list">
+            <!-- Khung giá từ (Vừa gõ vừa có danh sách gợi ý xổ xuống) -->
+            <input type="text" id="min-price" placeholder="Giá từ..." list="min-price-list" autocomplete="off">
             <datalist id="min-price-list">
-                <option value="0 VNĐ">
+                <option value="0.000 VNĐ">
                 <option value="10.000 VNĐ">
                 <option value="20.000 VNĐ">
                 <option value="50.000 VNĐ">
@@ -52,7 +52,7 @@
             </datalist>
 
             <!-- Khung đến giá -->
-            <input type="text" id="max-price" placeholder="Đến giá..." list="max-price-list">
+            <input type="text" id="max-price" placeholder="Đến giá..." list="max-price-list" autocomplete="off">
             <datalist id="max-price-list">
                 <option value="50.000 VNĐ">
                 <option value="100.000 VNĐ">
@@ -64,20 +64,12 @@
             <button id="btn-search">Tìm kiếm</button>
         </section>
 
-        <!-- Khu vực hiển thị danh sách sản phẩm -->
+        <!-- Khu vực hiển thị danh sách sản phẩm (Dạng lưới kề nhau) -->
         <section id="menu" class="menu-section">
             <h3 class="section-title">Thực Đơn Của Chúng Tôi</h3>
             
             <div id="product-list" class="product-grid">
-                <!-- Sản phẩm mẫu -->
-                <div class="product-card">
-                    <img src="banh-trang-tron-san-mon-an-vat-tien-loi-kho-cuong(1).jpg" alt="Bánh Tráng Trộn" class="product-img">
-                    <div class="product-info">
-                        <h4 class="product-name">Bánh Tráng Trộn Sẵn 8 Ghiền</h4>
-                        <p class="product-price">25.000 VNĐ</p>
-                        <button class="btn-add-cart">Thêm vào giỏ</button>
-                    </div>
-                </div>
+                <!-- Sản phẩm sẽ được render tự động từ main.js -->
             </div>
 
             <!-- Khu vực Phân trang -->
@@ -98,7 +90,7 @@
     </footer>
 
     <!-- Các file JS xử lý -->
-    <script src="initData.js"></script>
+    <script src="initdata.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
