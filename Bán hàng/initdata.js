@@ -1,66 +1,74 @@
-// JavaScript source code/
-// Khởi tạo Mock Data cho website Quán Ăn Phát Đạt
 function initializeData() {
-    // 1. Khởi tạo mảng Sản phẩm (products)
     if (!localStorage.getItem('products')) {
         const mockProducts = [
             {
-                id: "SP_HU_TIEU_NAM_VANG",
-                name: "Hủ Tiếu Nam Vang Thượng Hạng",
-                categoryId: "Mon nuoc",
-                price: 55000,
-                imageBase64: "...", // (Để trống chuỗi Base64 hoặc cho link ảnh nhẹ)
-                description: "Sợi hủ tiếu dai ngon ngập tràn trong nước dùng đậm đà, ăn kèm tôm tươi, thịt heo.",
-                status: "active",
-                isSold: true // Đã có người mua (test chức năng ẩn của Admin)
+                id: "SP_01",
+                name: "Bánh Tráng Trộn Sẵn 8 Ghiền",
+                categoryId: "Khai vi",
+                price: 25000,
+                image: "img/1.jpg",
+                description: "Bánh tráng trộn đậm vị, đầy đủ topping khô bò, trứng cút, mỡ hành.",
+                status: "active"
             },
             {
-                id: "SP_BANH_MI_CHAO",
-                name: "Bánh Mì Chảo Đặc Biệt",
+                id: "SP_02",
+                name: "Cá Viên Chiên (1 Xiên / 4 Viên)",
                 categoryId: "Khai vi",
-                price: 45000,
-                imageBase64: "...",
-                description: "Chảo gang nóng hổi kết hợp trứng ốp la lòng đào, thịt bò mềm thơm, xíu mại.",
-                status: "active",
-                isSold: false // Chưa có người mua (Admin có thể xóa hẳn)
-            }
-            // (Bạn dùng AI sinh thêm khoảng 30 món nữa theo mẫu này)
+                price: 5000,
+                image: "2.jpg",
+                description: "Cá viên chiên vàng giòn rụm, 1 xiên gồm 4 viên hấp dẫn.",
+                status: "active"
+            },
+            {
+                id: "SP_03",
+                name: "Kẹo Nhai Dynamite Chews (Gói)",
+                categoryId: "Khai vi",
+                price: 25000,
+                image: "3.jpg",
+                description: "Kẹo nhai Sô-cô-la hương bạc hà, đóng gói tiện lợi.",
+                status: "active"
+            },
+            {
+                id: "SP_04",
+                name: "Que Cây Vfoods Hot Chilli (Gói)",
+                categoryId: "Khai vi",
+                price: 15000,
+                image: "4.jpg",
+                description: "Bánh snack que cay Vfoods giòn rụm, vị cay ngọt hấp dẫn.",
+                status: "active"
+            },
+	    {
+                id: "SP_05",
+                name: "Xúc Xích Chiên (1 Cây)",
+                categoryId: "Khai vi",
+                price: 6000,
+                image: "5.jpg",
+                description: "Xúc xích chiên thơm ngon đậm đà, ăn kèm rau sống và tương ớt.",
+                status: "active"
+            },
         ];
         localStorage.setItem('products', JSON.stringify(mockProducts));
     }
 
-    // 2. Khởi tạo mảng Users
     if (!localStorage.getItem('users')) {
         const mockUsers = [
             {
                 id: "ADMIN_01",
                 username: "admin",
-                password: "123", // Làm đồ án nên để mật khẩu cơ bản
+                password: "123",
                 fullName: "Quản trị viên Phát Đạt",
                 phone: "0999999999",
                 address: { city: "TP HCM", district: "Quận 5", street: "273 Kinh Dương Vương" },
                 role: "admin",
-                isLocked: false
-            },
-            {
-                id: "CUST_01",
-                username: "khachhang1",
-                password: "123",
-                fullName: "Nguyễn Văn A",
-                phone: "0901234567",
-                address: { city: "TP HCM", district: "Quận 1", street: "123 Lê Lợi" },
-                role: "customer",
                 isLocked: false
             }
         ];
         localStorage.setItem('users', JSON.stringify(mockUsers));
     }
 
-    // 3. Khởi tạo mảng Giỏ hàng (cart) & Đơn hàng (orders) rỗng nếu chưa có
     if (!localStorage.getItem('cart')) localStorage.setItem('cart', JSON.stringify([]));
     if (!localStorage.getItem('orders')) localStorage.setItem('orders', JSON.stringify([]));
     if (!localStorage.getItem('currentUser')) localStorage.setItem('currentUser', JSON.stringify(null));
 }
 
-// Chạy hàm nạp dữ liệu khi load web
 initializeData();
