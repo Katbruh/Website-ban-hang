@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -30,7 +30,7 @@
             <p>Hương vị đậm đà - Phục vụ tận tâm</p>
         </section>
 
-        <!-- Khu vực tìm kiếm & Lọc (Dành cho Lợi code JS) -->
+        <!-- Khu vực tìm kiếm & Lọc -->
         <section class="search-filter-section">
             <input type="text" id="search-name" placeholder="Tìm tên món ăn...">
             <select id="filter-category">
@@ -40,18 +40,36 @@
                 <option value="Com">Cơm</option>
                 <option value="Mi">Mì & Mì Ý</option>
             </select>
-            <input type="number" id="min-price" placeholder="Giá từ...">
-            <input type="number" id="max-price" placeholder="Đến giá...">
-            <button id="btn-search">Tìm kiếm nâng cao</button>
+
+            <!-- Khung giá từ (Có hỗ trợ gõ & xổ xuống chọn mức giá sạch sẽ) -->
+            <input type="text" id="min-price" placeholder="Giá từ..." list="min-price-list">
+            <datalist id="min-price-list">
+                <option value="0 VNĐ">
+                <option value="10.000 VNĐ">
+                <option value="20.000 VNĐ">
+                <option value="50.000 VNĐ">
+                <option value="100.000 VNĐ">
+            </datalist>
+
+            <!-- Khung đến giá -->
+            <input type="text" id="max-price" placeholder="Đến giá..." list="max-price-list">
+            <datalist id="max-price-list">
+                <option value="50.000 VNĐ">
+                <option value="100.000 VNĐ">
+                <option value="200.000 VNĐ">
+                <option value="500.000 VNĐ">
+                <option value="1.000.000 VNĐ">
+            </datalist>
+
+            <button id="btn-search">Tìm kiếm</button>
         </section>
 
-       <!-- Khu vực hiển thị danh sách sản phẩm -->
+        <!-- Khu vực hiển thị danh sách sản phẩm -->
         <section id="menu" class="menu-section">
             <h3 class="section-title">Thực Đơn Của Chúng Tôi</h3>
             
-            <!-- Chèn các sản phẩm vào đây -->
             <div id="product-list" class="product-grid">
-                <!-- Sản phẩm 1 -->
+                <!-- Sản phẩm mẫu -->
                 <div class="product-card">
                     <img src="banh-trang-tron-san-mon-an-vat-tien-loi-kho-cuong(1).jpg" alt="Bánh Tráng Trộn" class="product-img">
                     <div class="product-info">
@@ -60,8 +78,6 @@
                         <button class="btn-add-cart">Thêm vào giỏ</button>
                     </div>
                 </div>
-
-                <!-- Sản phẩm 2, 3, 4... bạn cứ copy tiếp thẻ .product-card dán nối tiếp vào đây -->
             </div>
 
             <!-- Khu vực Phân trang -->
@@ -81,9 +97,8 @@
         </div>
     </footer>
 
-    <!-- File JS khởi tạo dữ liệu mẫu -->
+    <!-- Các file JS xử lý -->
     <script src="initData.js"></script>
-    <!-- File JS xử lý nghiệp vụ chung -->
     <script src="main.js"></script>
 </body>
 </html>
