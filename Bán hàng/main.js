@@ -1,10 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 1. Lấy dữ liệu sản phẩm từ localStorage
     let products = JSON.parse(localStorage.getItem('products')) || [];
 
     const productList = document.getElementById('product-list');
-    const searchNameInput = document.getElementById('search-name');
-    const filterCategory = document.getElementById('filter-category');
     const minPriceInput = document.getElementById('min-price');
     const maxPriceInput = document.getElementById('max-price');
     const btnSearch = document.getElementById('btn-search');
@@ -14,11 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function renderProducts(list) {
         if (!productList) return;
         productList.innerHTML = '';
-
-        if (list.length === 0) {
-            productList.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: #aaa; padding: 20px;">Không tìm thấy món ăn phù hợp!</p>';
-            return;
-        }
 
         list.forEach(product => {
             const formattedPrice = Number(product.price).toLocaleString('vi-VN') + " VNĐ";
@@ -41,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     renderProducts(products);
 
-    // 2. Hàm tự động cách 3 chữ số khi nhập (từ file gốc của bạn)[cite: 5]
+    // Hàm tự động cách 3 chữ số khi nhập (từ file gốc của bạn)[cite: 5]
     function formatCurrencyInput(inputElement) {
         inputElement.addEventListener('input', function (e) {
             let value = this.value.replace(/\D/g, '');
@@ -55,34 +47,31 @@ document.addEventListener("DOMContentLoaded", function () {
     if (minPriceInput) formatCurrencyInput(minPriceInput);
     if (maxPriceInput) formatCurrencyInput(maxPriceInput);
 
-    // 3. Xử lý chức năng Tìm kiếm & Lọc
-    function handleSearchAndFilter() {
-        const keyword = searchNameInput.value.toLowerCase().trim();
-        const selectedCategory = filterCategory.value;
-
-        const minPriceVal = minPriceInput.value.replace(/\D/g, '');
-        const maxPriceVal = maxPriceInput.value.replace(/\D/g, '');
-
-        const minPrice = minPriceVal !== '' ? Number(minPriceVal) : 0;
-        const maxPrice = maxPriceVal !== '' ? Number(maxPriceVal) : Infinity;
-
-        const filtered = products.filter(p => {
-            const matchName = p.name.toLowerCase().includes(keyword);
-            const matchCategory = (selectedCategory === 'all' || p.categoryId === selectedCategory);
-            const matchPrice = (p.price >= minPrice && p.price <= maxPrice);
-            return matchName && matchCategory && matchPrice;
-        });
-
-        renderProducts(filtered);
-    }
-
+    // Xử lý nút tìm kiếm tĩnh: Khi ấn hiển thị thông báo "Đã áp dụng bộ lọc"
     if (btnSearch) {
-        btnSearch.addEventListener('click', handleSearchAndFilter);
+        btnSearch.addEventListener('click', function () {
+            showToast("Đã áp dụng");
+        });
     }
-    if (searchNameInput) searchNameInput.addEventListener('input', handleSearchAndFilter);
-    if (filterCategory) filterCategory.addEventListener('change', handleSearchAndFilter);
 
-    // 4. Xử lý giỏ hàng
+    // Hàm hiển thị hộp thông báo pop-up (Toast)
+    function showToast(message) {
+        let toast = document.getElementById('toast-notification');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'toast-notification';
+            document.body.appendChild(toast);
+        }
+        toast.textContent = message;
+        toast.classList.add('show');
+
+        // Tự động ẩn sau 2 giây
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2000);
+    }
+
+    // Xử lý giỏ hàng cơ bản
     function attachAddToCartEvents() {
         const addButtons = document.querySelectorAll('.btn-add-cart');
         addButtons.forEach(btn => {
