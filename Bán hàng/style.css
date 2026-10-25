@@ -14,7 +14,7 @@ body {
 
 /* Header */
 header {
-    background-color: #C0392B; /* Màu đỏ sậm chủ đạo */
+    background-color: #C0392B;
     color: #fff;
     display: flex;
     justify-content: space-between;
@@ -46,7 +46,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #F1C40F; /* Màu vàng nhấn khi hover */
+    color: #F1C40F;
 }
 
 /* Banner */
@@ -96,7 +96,7 @@ nav a:hover {
     background-color: #219150;
 }
 
-/* Danh sách sản phẩm (Lưới thu gọn) */
+/* Danh sách sản phẩm (Lưới kề nhau) */
 .menu-section {
     max-width: 1200px;
     margin: 0 auto;
@@ -120,7 +120,7 @@ input::placeholder {
     gap: 15px;
 }
 
-/* Từng thẻ sản phẩm (Product Card nhỏ gọn) */
+/* Từng thẻ sản phẩm */
 .product-card {
     background-color: #1e1e1e;
     border: 1px solid #2d2d2d;
