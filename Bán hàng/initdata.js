@@ -33,11 +33,11 @@ function initializeData() {
                 name: "Que Cây Vfoods Hot Chilli (Gói)",
                 categoryId: "Khai vi",
                 price: 15000,
-                image: "4.jpg",
+                image: "img/4.jpg",
                 description: "Bánh snack que cay Vfoods giòn rụm, vị cay ngọt hấp dẫn.",
                 status: "active"
             },
-	    {
+            {
                 id: "SP_05",
                 name: "Xúc Xích Chiên (1 Cây)",
                 categoryId: "Khai vi",
