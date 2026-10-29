@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phát Đạt - Thực Đơn Sản Phẩm</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <a href="index.html" class="logo-link">
+                <img src="img/logo.png" alt="Phát Đạt Quán Ăn Logo" class="logo-img">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="menu.html">Thực đơn</a></li>
+                <li><a href="cart.html">Giỏ hàng (<span id="cart-count">0</span>)</a></li>
+                <li id="auth-menu"><a href="login.html" id="login-btn">Đăng nhập / Đăng ký</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="menu-page-container">
+        <!-- Khối Thanh tìm kiếm được bọc và căn giữa chuẩn chỉnh -->
+        <div class="search-wrapper">
+            <section class="search-filter-section">
+                <input type="text" id="search-name" placeholder="Tìm tên món ăn...">
+                <select id="filter-category">
+                    <option value="all">Tất cả danh mục</option>
+                    <option value="M01">Nhóm bánh tráng & món trộn</option>
+                    <option value="M02">Nhóm đồ chiên, xiên que</option>
+                    <option value="M03">Nhóm trái cây lắc & ăn vặt khô</option>
+                    <option value="M04">Nhóm bánh & kẹo</option>
+                    <option value="M05">Nhóm giải khát</option>
+                </select>
+
+                <input type="text" id="min-price" placeholder="Giá từ..." list="min-price-list" autocomplete="off">
+                <datalist id="min-price-list">
+                    <option value="0.000 VNĐ">
+                    <option value="10.000 VNĐ">
+                    <option value="20.000 VNĐ">
+                    <option value="50.000 VNĐ">
+                </datalist>
+
+                <input type="text" id="max-price" placeholder="Đến giá..." list="max-price-list" autocomplete="off">
+                <datalist id="max-price-list">
+                    <option value="50.000 VNĐ">
+                    <option value="100.000 VNĐ">
+                    <option value="200.000 VNĐ">
+                    <option value="500.000 VNĐ">
+                </datalist>
+
+                <button id="btn-search">Tìm kiếm</button>
+            </section>
+        </div>
+
+        <!-- Khu vực hiển thị toàn bộ danh sách sản phẩm thực đơn -->
+        <section id="menu" class="menu-section">
+            <div class="menu-header-row" style="margin-bottom: 20px;">
+                <h3 class="section-title-left">Tất Cả Sản Phẩm Thực Đơn</h3>
+            </div>
+            
+            <div id="product-list" class="product-grid">
+                <!-- Sản phẩm render tự động từ main.js -->
+            </div>
+
+            <div id="pagination" class="pagination-container"></div>
+        </section>
+    </main>
+
+    <!-- Hộp thông báo Toast tĩnh -->
+    <div id="toast-notification">Thông báo</div>
+
+    <!-- FOOTER 4 CỘT CHUẨN MẪU -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="footer-logo-area">
+                    <img src="img/logo.png" alt="Logo" class="footer-logo-img">
+                    <span class="footer-title">Quán Ăn Phát Đạt</span>
+                </div>
+                <p class="footer-desc">Quán ăn vặt Phát Đạt chuyên cung cấp các món ăn vặt, xiên que, bánh tráng và đồ uống đậm vị, phục vụ tận tâm.</p>
+            </div>
+
+            <div class="footer-col">
+                <h3>Thông tin liên hệ</h3>
+                <ul class="footer-links">
+                    <li><strong>Địa chỉ:</strong> 273 Kinh Dương Vương, Phường Chợ Quán, TP. HCM</li>
+                    <li><strong>Điện thoại:</strong> 0123 456 789</li>
+                    <li><strong>Email:</strong> phatdatquan@gmail.com</li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Dòng sản phẩm</h3>
+                <ul class="footer-links">
+                    <li><a href="menu.html">Nhóm bánh tráng & món trộn</a></li>
+                    <li><a href="menu.html">Nhóm đồ chiên, xiên que</a></li>
+                    <li><a href="menu.html">Nhóm trái cây lắc & ăn vặt khô</a></li>
+                    <li><a href="menu.html">Nhóm bánh & kẹo</a></li>
+                    <li><a href="menu.html">Nhóm giải khát</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Chính sách</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="policy-link">Chính sách đổi trả</a></li>
+                    <li><a href="#" class="policy-link">Chính sách vận chuyển</a></li>
+                    <li><a href="#" class="policy-link">Chính sách bảo hành</a></li>
+                    <li><a href="#" class="policy-link">Chính sách thanh toán</a></li>
+                    <li><a href="#" class="policy-link">Chính sách bảo mật</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Đồ án Lập trình Web - Nhóm 6969.</p>
+        </div>
+    </footer>
+
+    <script src="initdata.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
