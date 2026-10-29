@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     renderProducts(products);
 
-    // Hàm tự động cách 3 chữ số khi nhập (từ file gốc của bạn)[cite: 5]
+    // Hàm tự động cách 3 chữ số khi nhập
     function formatCurrencyInput(inputElement) {
         inputElement.addEventListener('input', function (e) {
             let value = this.value.replace(/\D/g, '');
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (minPriceInput) formatCurrencyInput(minPriceInput);
     if (maxPriceInput) formatCurrencyInput(maxPriceInput);
 
-    // Xử lý nút tìm kiếm tĩnh: Khi ấn hiển thị thông báo "Đã áp dụng bộ lọc"
+    // Xử lý nút tìm kiếm tĩnh
     if (btnSearch) {
         btnSearch.addEventListener('click', function () {
             showToast("Đã áp dụng");
@@ -65,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
         toast.textContent = message;
         toast.classList.add('show');
 
-        // Tự động ẩn sau 2 giây
         setTimeout(() => {
             toast.classList.remove('show');
         }, 2000);
@@ -105,4 +104,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     updateCartCount();
+
+    // Xử lý click vào các liên kết chính sách ở footer
+    const policyLinks = document.querySelectorAll('.policy-link');
+    policyLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            showToast("Nội dung đang được cập nhật");
+        });
+    });
 });
