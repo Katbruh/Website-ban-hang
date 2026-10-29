@@ -175,14 +175,52 @@
         </div>
     </main>
 
+    <!-- Hộp thông báo Toast tĩnh -->
     <div id="toast-notification">Thông báo</div>
 
+    <!-- FOOTER 4 CỘT CHUẨN MẪU -->
     <footer>
-        <div class="footer-content">
-            <h3>Quán Ăn Phát Đạt</h3>
-            <p><strong>Địa chỉ:</strong> 273 Kinh Dương Vương, Phường Chợ Quán, TP. HCM</p>
-            <p><strong>Hotline:</strong> 0123 456 789</p>
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="footer-logo-area">
+                    <img src="img/logo.png" alt="Logo" class="footer-logo-img">
+                    <span class="footer-title">Quán Ăn Phát Đạt</span>
+                </div>
+                <p class="footer-desc">Quán ăn vặt Phát Đạt chuyên cung cấp các món ăn vặt, xiên que, bánh tráng và đồ uống đậm vị, phục vụ tận tâm.</p>
+            </div>
+
+            <div class="footer-col">
+                <h3>Thông tin liên hệ</h3>
+                <ul class="footer-links">
+                    <li><strong>Địa chỉ:</strong> 273 Kinh Dương Vương, Phường Chợ Quán, TP. HCM</li>
+                    <li><strong>Điện thoại:</strong> 0123 456 789</li>
+                    <li><strong>Email:</strong> phatdatquan@gmail.com</li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Dòng sản phẩm</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html#menu">Nhóm bánh tráng & món trộn</a></li>
+                    <li><a href="index.html#menu">Nhóm đồ chiên, xiên que</a></li>
+                    <li><a href="index.html#menu">Nhóm trái cây lắc & ăn vặt khô</a></li>
+                    <li><a href="index.html#menu">Nhóm bánh & kẹo</a></li>
+                    <li><a href="index.html#menu">Nhóm giải khát</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Chính sách</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="policy-link">Chính sách đổi trả</a></li>
+                    <li><a href="#" class="policy-link">Chính sách vận chuyển</a></li>
+                    <li><a href="#" class="policy-link">Chính sách bảo hành</a></li>
+                    <li><a href="#" class="policy-link">Chính sách thanh toán</a></li>
+                    <li><a href="#" class="policy-link">Chính sách bảo mật</a></li>
+                </ul>
+            </div>
         </div>
+
         <div class="footer-bottom">
             <p>&copy; 2026 Đồ án Lập trình Web - Nhóm 6969.</p>
         </div>
@@ -208,6 +246,99 @@
                 panelLogin.classList.remove('active');
             }
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const toast = document.getElementById('toast-notification');
+
+            function showToast(message) {
+                if (!toast) return;
+                toast.textContent = message;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2000);
+            }
+
+            const btnLogin = document.getElementById('btn-login');
+            if (btnLogin) {
+                btnLogin.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const enteredUser = document.getElementById('login-username').value.trim();
+                    const enteredPass = document.getElementById('login-password').value.trim();
+
+                    if (!enteredUser || !enteredPass) {
+                        showToast("Vui lòng điền đầy đủ thông tin");
+                        return;
+                    }
+
+                    let users = JSON.parse(localStorage.getItem('users')) || [];
+                    const matchedUser = users.find(u => u.username === enteredUser && u.password === enteredPass);
+
+                    if (matchedUser) {
+                        localStorage.setItem('currentUser', JSON.stringify(matchedUser));
+                        showToast("Đăng nhập thành công");
+                    } else {
+                        showToast("Đăng nhập thất bại");
+                    }
+                });
+            }
+
+            const btnRegister = document.getElementById('btn-register');
+            if (btnRegister) {
+                btnRegister.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const username = document.getElementById('reg-username').value.trim();
+                    const phone = document.getElementById('reg-phone').value.trim();
+                    const gender = document.getElementById('reg-gender').value;
+                    const dob = document.getElementById('reg-dob').value;
+                    const password = document.getElementById('reg-password').value.trim();
+                    const confirmPass = document.getElementById('reg-confirm').value.trim();
+
+                    if (!username || !phone || !gender || !dob || !password || !confirmPass) {
+                        showToast("Vui lòng nhập đầy đủ thông tin");
+                        return;
+                    }
+
+                    if (password !== confirmPass) {
+                        showToast("Mật khẩu không khớp");
+                        return;
+                    }
+
+                    let users = JSON.parse(localStorage.getItem('users')) || [];
+                    const existing = users.find(u => u.username === username);
+
+                    if (existing) {
+                        showToast("Tên đăng nhập đã tồn tại");
+                    } else {
+                        users.push({
+                            id: "USER_" + Date.now(),
+                            username: username,
+                            phone: phone,
+                            gender: gender,
+                            dob: dob,
+                            password: password,
+                            role: "customer"
+                        });
+                        localStorage.setItem('users', JSON.stringify(users));
+                        showToast("Đăng ký thành công");
+
+                        setTimeout(() => {
+                            switchTab('login');
+                        }, 1500);
+                    }
+                });
+            }
+
+            // Xử lý nút chính sách ở footer
+            const policyLinks = document.querySelectorAll('.policy-link');
+            policyLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    showToast("Nội dung đang được cập nhật");
+                });
+            });
+        });
     </script>
 </body>
 </html>
