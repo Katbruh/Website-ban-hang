@@ -6,11 +6,6 @@
     <title>Phát Đạt - Giỏ Hàng Của Bạn</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .logo { display: flex; align-items: center; }
-        .logo-link { display: inline-block; line-height: 0; text-decoration: none; }
-        .logo-img { height: 48px; width: auto; object-fit: contain; transition: transform 0.2s ease; }
-        .logo-img:hover { transform: scale(1.03); }
-
         .cart-container {
             max-width: 1000px;
             margin: 30px auto;
@@ -102,31 +97,6 @@
             border: none;
             cursor: pointer;
         }
-
-        /* Khung thông báo Toast tĩnh */
-        #toast-notification {
-            position: fixed;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #1a252f;
-            color: #fff;
-            padding: 14px 28px;
-            border-radius: 8px;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-            font-size: 15px;
-            font-weight: 500;
-            z-index: 9999;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-        }
-
-        #toast-notification.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-        }
     </style>
 </head>
 <body>
@@ -192,10 +162,8 @@
         </div>
     </main>
 
-    <!-- Hộp thông báo Toast tĩnh -->
     <div id="toast-notification">Thông báo</div>
 
-    <!-- FOOTER -->
     <footer>
         <div class="footer-content">
             <h3>Quán Ăn Phát Đạt</h3>
@@ -207,47 +175,6 @@
         </div>
     </footer>
 
-    <!-- Script tĩnh đồng bộ Toast tại chỗ, không chuyển trang -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const btnCheckout = document.getElementById('btn-checkout');
-            const btnAddMore = document.getElementById('btn-add-more');
-            const btnDelete = document.getElementById('btn-delete');
-            const toast = document.getElementById('toast-notification');
-
-            function showToast(message) {
-                if (!toast) return;
-                toast.textContent = message;
-                toast.classList.add('show');
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 2000);
-            }
-
-            // Nút Tiến hành đặt hàng: hiện "Đã đặt hàng" tại chỗ
-            if (btnCheckout) {
-                btnCheckout.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    showToast("Đã đặt hàng");
-                });
-            }
-
-            // Nút Thêm món khác: hiện "Đã thêm món" tại chỗ, đứng yên không dịch chuyển
-            if (btnAddMore) {
-                btnAddMore.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    showToast("Đã thêm món");
-                });
-            }
-
-            // Nút Xóa sản phẩm: hiện "Đã xóa món hàng" tại chỗ
-            if (btnDelete) {
-                btnDelete.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    showToast("Đã xóa món hàng");
-                });
-            }
-        });
-    </script>
+    <script src="cart.js"></script>
 </body>
 </html>
