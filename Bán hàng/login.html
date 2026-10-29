@@ -1,144 +1,326 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập / Đăng ký - Phát Đạt</title>
+    <title>Phát Đạt - Tài Khoản</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* CSS riêng cho trang đăng nhập/đăng ký */
+        .logo { display: flex; align-items: center; }
+        .logo-link { display: inline-block; line-height: 0; text-decoration: none; }
+        .logo-img { height: 48px; width: auto; object-fit: contain; transition: transform 0.2s ease; }
+        .logo-img:hover { transform: scale(1.03); }
+
         .auth-container {
-            max-width: 400px;
-            margin: 50px auto;
-            background: #1f1f1f;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+            max-width: 460px;
+            margin: 40px auto;
+            background-color: #1f1f1f;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            border: 1px solid #2d2d2d;
         }
 
         .auth-tabs {
             display: flex;
-            margin-bottom: 20px;
-        }
-
-            .auth-tabs button {
-                flex: 1;
-                padding: 10px;
-                border: none;
-                background: #2b2b2b;
-                color: #f1f1f1;
-                cursor: pointer;
-                font-weight: bold;
-            }
-
-                .auth-tabs button.active {
-                    background: #C0392B;
-                    color: #fff;
-                }
-
-        .auth-form {
-            display: none;
-        }
-
-            .auth-form.active {
-                display: block;
-            }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-            .form-group label {
-                display: block;
-                margin-bottom: 5px;
-                font-weight: bold;
-            }
-
-            .form-group input {
-                width: 100%;
-                padding: 10px;
-                border: 1px solid #444;
-                background: #2b2b2b;
-                color: #f1f1f1;
-                border-radius: 4px;
-            }
-
-        .btn-submit {
-            width: 100%;
-            padding: 12px;
-            background: #27AE60;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
+            background-color: #181818;
             cursor: pointer;
         }
 
-            .btn-submit:hover {
-                background: #219150;
-            }
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 16px;
+            color: #aaa;
+            font-weight: bold;
+            font-size: 16px;
+            background-color: #2b2b2b;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
 
-        .error-msg {
-            color: red;
-            font-size: 14px;
-            margin-bottom: 10px;
+        .auth-tab.active {
+            background-color: #C0392B;
+            color: #ffffff;
+        }
+
+        .auth-form {
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-panel {
             display: none;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-panel.active {
+            display: flex;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .form-group input, .form-group select {
+            padding: 10px 12px;
+            border: 1px solid #444;
+            background-color: #2a2a2a;
+            color: #ffffff;
+            border-radius: 6px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .btn-submit {
+            margin-top: 10px;
+            padding: 13px;
+            background-color: #27AE60;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #toast-notification {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #1a252f;
+            color: #ffffff;
+            padding: 14px 28px;
+            border-radius: 8px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+            font-size: 16px;
+            font-weight: 500;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+        }
+
+        #toast-notification.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
         }
     </style>
 </head>
 <body>
+    <!-- HEADER -->
     <header>
-        <div class="logo">
-            <h1><a href="index.html" style="color: white; text-decoration: none;">Phát Đạt</a></h1>
-        </div>
-    </header>
+    <div class="logo">
+        <a href="index.html" class="logo-link">
+            <img src="img/logo.png" alt="Phát Đạt Quán Ăn Logo" class="logo-img">
+        </a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="index.html#menu">Thực đơn</a></li>
+            <li><a href="cart.html">Giỏ hàng (<span id="cart-count">0</span>)</a></li>
+            <li id="auth-menu"><a href="login.html" id="login-btn">Đăng nhập / Đăng ký</a></li>
+        </ul>
+    </nav>
+</header>
 
+    <!-- MAIN CONTENT -->
     <main>
         <div class="auth-container">
             <div class="auth-tabs">
-                <button id="tab-login" class="active" onclick="switchTab('login')">Đăng Nhập</button>
-                <button id="tab-register" onclick="switchTab('register')">Đăng Ký</button>
+                <div id="tab-login-btn" class="auth-tab active" onclick="switchTab('login')">Đăng Nhập</div>
+                <div id="tab-register-btn" class="auth-tab" onclick="switchTab('register')">Đăng Ký</div>
             </div>
 
-            <!-- FORM ĐĂNG NHẬP -->
-            <form id="form-login" class="auth-form active" onsubmit="handleLogin(event)">
-                <div id="login-error" class="error-msg"></div>
+            <!-- KHUNG ĐĂNG NHẬP -->
+            <div id="panel-login" class="auth-form form-panel active">
                 <div class="form-group">
-                    <label>Tên đăng nhập:</label>
-                    <input type="text" id="login-username" required>
+                    <label for="login-username">Tên đăng nhập:</label>
+                    <input type="text" id="login-username" placeholder="Nhập tên đăng nhập...">
                 </div>
-                <div class="form-group">
-                    <label>Mật khẩu:</label>
-                    <input type="password" id="login-password" required>
-                </div>
-                <button type="submit" class="btn-submit">ĐĂNG NHẬP</button>
-            </form>
 
-            <!-- FORM ĐĂNG KÝ -->
-            <form id="form-register" class="auth-form" onsubmit="handleRegister(event)">
-                <div id="register-error" class="error-msg"></div>
                 <div class="form-group">
-                    <label>Họ và tên:</label>
-                    <input type="text" id="reg-fullname" required>
+                    <label for="login-password">Mật khẩu:</label>
+                    <input type="password" id="login-password" placeholder="Nhập mật khẩu...">
                 </div>
+
+                <button type="button" id="btn-login" class="btn-submit">ĐĂNG NHẬP</button>
+            </div>
+
+            <!-- KHUNG ĐĂNG KÝ -->
+            <div id="panel-register" class="auth-form form-panel">
                 <div class="form-group">
-                    <label>Số điện thoại:</label>
-                    <input type="tel" id="reg-phone" required pattern="[0-9]{10}" title="Vui lòng nhập 10 chữ số">
+                    <label for="reg-username">Tên đăng nhập:</label>
+                    <input type="text" id="reg-username" placeholder="Nhập tên đăng nhập...">
                 </div>
+
                 <div class="form-group">
-                    <label>Tên đăng nhập:</label>
-                    <input type="text" id="reg-username" required>
+                    <label for="reg-phone">Số điện thoại:</label>
+                    <input type="tel" id="reg-phone" placeholder="Nhập số điện thoại...">
                 </div>
+
                 <div class="form-group">
-                    <label>Mật khẩu:</label>
-                    <input type="password" id="reg-password" required minlength="3">
+                    <label for="reg-gender">Giới tính:</label>
+                    <select id="reg-gender">
+                        <option value="" disabled selected hidden>-- Chọn giới tính --</option>
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                        <option value="Khác">Khác</option>
+                    </select>
                 </div>
-                <button type="submit" class="btn-submit">ĐĂNG KÝ NGAY</button>
-            </form>
+
+                <div class="form-group">
+                    <label for="reg-dob">Ngày sinh:</label>
+                    <input type="date" id="reg-dob" style="color-scheme: dark;">
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-password">Mật khẩu:</label>
+                    <input type="password" id="reg-password" placeholder="Nhập mật khẩu...">
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-confirm">Xác nhận mật khẩu:</label>
+                    <input type="password" id="reg-confirm" placeholder="Nhập lại mật khẩu...">
+                </div>
+
+                <button type="button" id="btn-register" class="btn-submit">ĐĂNG KÝ</button>
+            </div>
         </div>
     </main>
 
-    <!-- File JS xử lý logic đăng nhập/đăng ký -->
-    <script src="auth.js"></script>
+    <!-- Hộp thông báo Toast tĩnh -->
+    <div id="toast-notification">Thông báo</div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <h3>Quán Ăn Phát Đạt</h3>
+            <p><strong>Địa chỉ:</strong> 273 Kinh Dương Vương, Phường Chợ Quán, TP. HCM</p>
+            <p><strong>Hotline:</strong> 0123 456 789</p>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Đồ án Lập trình Web - Nhóm 6969.</p>
+        </div>
+    </footer>
+
+    <!-- Script xử lý -->
+    <script src="initdata.js"></script>
+    <script>
+        function switchTab(tabName) {
+            const tabLoginBtn = document.getElementById('tab-login-btn');
+            const tabRegisterBtn = document.getElementById('tab-register-btn');
+            const panelLogin = document.getElementById('panel-login');
+            const panelRegister = document.getElementById('panel-register');
+
+            if (tabName === 'login') {
+                tabLoginBtn.classList.add('active');
+                tabRegisterBtn.classList.remove('active');
+                panelLogin.classList.add('active');
+                panelRegister.classList.remove('active');
+            } else {
+                tabRegisterBtn.classList.add('active');
+                tabLoginBtn.classList.remove('active');
+                panelRegister.classList.add('active');
+                panelLogin.classList.remove('active');
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const toast = document.getElementById('toast-notification');
+
+            function showToast(message) {
+                if (!toast) return;
+                toast.textContent = message;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2000);
+            }
+
+            const btnLogin = document.getElementById('btn-login');
+            if (btnLogin) {
+                btnLogin.addEventListener('click', function () {
+                    const enteredUser = document.getElementById('login-username').value.trim();
+                    const enteredPass = document.getElementById('login-password').value.trim();
+
+                    if (!enteredUser || !enteredPass) {
+                        showToast("Vui lòng điền đầy đủ thông tin");
+                        return;
+                    }
+
+                    let users = JSON.parse(localStorage.getItem('users')) || [];
+                    const matchedUser = users.find(u => u.username === enteredUser && u.password === enteredPass);
+
+                    if (matchedUser) {
+                        localStorage.setItem('currentUser', JSON.stringify(matchedUser));
+                        showToast("Đăng nhập thành công");
+                    } else {
+                        showToast("Đăng nhập thất bại");
+                    }
+                });
+            }
+
+            const btnRegister = document.getElementById('btn-register');
+            if (btnRegister) {
+                btnRegister.addEventListener('click', function () {
+                    const username = document.getElementById('reg-username').value.trim();
+                    const phone = document.getElementById('reg-phone').value.trim();
+                    const gender = document.getElementById('reg-gender').value;
+                    const dob = document.getElementById('reg-dob').value;
+                    const password = document.getElementById('reg-password').value.trim();
+                    const confirmPass = document.getElementById('reg-confirm').value.trim();
+
+                    if (!username || !phone || !gender || !dob || !password || !confirmPass) {
+                        showToast("Vui lòng nhập đầy đủ thông tin");
+                        return;
+                    }
+
+                    if (password !== confirmPass) {
+                        showToast("Mật khẩu không khớp");
+                        return;
+                    }
+
+                    let users = JSON.parse(localStorage.getItem('users')) || [];
+                    const existing = users.find(u => u.username === username);
+
+                    if (existing) {
+                        showToast("Tên đăng nhập đã tồn tại");
+                    } else {
+                        users.push({
+                            id: "USER_" + Date.now(),
+                            username: username,
+                            phone: phone,
+                            gender: gender,
+                            dob: dob,
+                            password: password,
+                            role: "customer"
+                        });
+                        localStorage.setItem('users', JSON.stringify(users));
+                        showToast("Đăng ký thành công");
+
+                        setTimeout(() => {
+                            switchTab('login');
+                        }, 1500);
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
