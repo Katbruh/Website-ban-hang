@@ -9,30 +9,28 @@
 <body>
     <!-- HEADER -->
     <header>
-    <div class="logo">
-        <a href="index.html" class="logo-link">
-            <img src="img/logo.png" alt="Phát Đạt Quán Ăn Logo" class="logo-img">
-        </a>
-    </div>
-    <nav>
-        <ul>
-            <li><a href="index.html">Trang chủ</a></li>
-            <li><a href="index.html#menu">Thực đơn</a></li>
-            <li><a href="cart.html">Giỏ hàng (<span id="cart-count">0</span>)</a></li>
-            <li id="auth-menu"><a href="login.html" id="login-btn">Đăng nhập / Đăng ký</a></li>
-        </ul>
-    </nav>
-</header>
+        <div class="logo">
+            <a href="index.html" class="logo-link">
+                <img src="img/logo.png" alt="Phát Đạt Quán Ăn Logo" class="logo-img">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="index.html#menu">Thực đơn</a></li>
+                <li><a href="cart.html">Giỏ hàng (<span id="cart-count">0</span>)</a></li>
+                <li id="auth-menu"><a href="login.html" id="login-btn">Đăng nhập / Đăng ký</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <!-- MAIN CONTENT -->
     <main>
-        <!-- Banner giới thiệu -->
         <section class="banner">
             <h2>Chào mừng đến với Quán Ăn Phát Đạt</h2>
             <p>Hương vị đậm đà - Phục vụ tận tâm</p>
         </section>
 
-        <!-- Khu vực tìm kiếm & Lọc -->
         <section class="search-filter-section">
             <input type="text" id="search-name" placeholder="Tìm tên món ăn...">
             <select id="filter-category">
@@ -44,7 +42,6 @@
                 <option value="M05">Nhóm giải khát</option>
             </select>
 
-            <!-- Khung giá từ (Có hỗ trợ gõ & datalist gợi ý) -->
             <input type="text" id="min-price" placeholder="Giá từ..." list="min-price-list" autocomplete="off">
             <datalist id="min-price-list">
                 <option value="0.000 VNĐ">
@@ -53,7 +50,6 @@
                 <option value="50.000 VNĐ">
             </datalist>
 
-            <!-- Khung đến giá -->
             <input type="text" id="max-price" placeholder="Đến giá..." list="max-price-list" autocomplete="off">
             <datalist id="max-price-list">
                 <option value="50.000 VNĐ">
@@ -65,20 +61,15 @@
             <button id="btn-search">Tìm kiếm</button>
         </section>
 
-        <!-- Khu vực hiển thị danh sách sản phẩm -->
         <section id="menu" class="menu-section">
             <h3 class="section-title">Thực Đơn Của Chúng Tôi</h3>
-            
-            <div id="product-list" class="product-grid">
-                <!-- Sản phẩm sẽ được render tự động từ main.js -->
-            </div>
-
-            <!-- Khu vực Phân trang -->
+            <div id="product-list" class="product-grid"></div>
             <div id="pagination" class="pagination-container"></div>
         </section>
     </main>
 
-    <!-- FOOTER -->
+    <div id="toast-notification">Thông báo</div>
+
     <footer>
         <div class="footer-content">
             <h3>Quán Ăn Phát Đạt</h3>
@@ -90,7 +81,6 @@
         </div>
     </footer>
 
-    <!-- Các file JS xử lý -->
     <script src="initdata.js"></script>
     <script src="main.js"></script>
 </body>
