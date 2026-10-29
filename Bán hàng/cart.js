@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const btnCheckout = document.getElementById('btn-checkout');
     const btnAddMore = document.getElementById('btn-add-more');
     const btnDelete = document.getElementById('btn-delete');
-    const btnExplore = document.getElementById('btn-explore');
+    const policyLinks = document.querySelectorAll('.policy-link');
 
     // Hàm hiển thị bảng thông báo nhỏ (Toast) ngay tại chỗ
     function showToast(message) {
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 2000);
     }
 
-    // 1. Nút "Thêm món khác": Nhấn vào đứng yên tại chỗ, chỉ hiện bảng "Đã thêm món"
+    // Nút "Thêm món khác"
     if (btnAddMore) {
         btnAddMore.addEventListener('click', function (e) {
             e.preventDefault();
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 2. Nút "Tiến hành đặt hàng": Nhấn vào đứng yên tại chỗ, hiện bảng "Đã đặt hàng"
+    // Nút "Tiến hành đặt hàng"
     if (btnCheckout) {
         btnCheckout.addEventListener('click', function (e) {
             e.preventDefault();
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 3. Nút "Xóa" sản phẩm: Nhấn vào đứng yên tại chỗ, hiện bảng "Đã xóa món hàng"
+    // Nút "Xóa" sản phẩm
     if (btnDelete) {
         btnDelete.addEventListener('click', function (e) {
             e.preventDefault();
@@ -47,12 +47,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 4. Nút "Khám phá thực đơn ngay" (khi giỏ trống): Nhấn vào hiện bảng "Đã chuyển sang trang chủ"
-    if (btnExplore) {
-        btnExplore.addEventListener('click', function (e) {
+    // Các liên kết chính sách ở footer
+    policyLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
-            showToast("Đã chuyển sang trang chủ");
+            showToast("Nội dung đang được cập nhật");
         });
-    }
+    });
 });
