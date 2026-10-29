@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phát Đạt - Giỏ Hàng Của Bạn</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .logo { display: flex; align-items: center; }
+        .logo-link { display: inline-block; line-height: 0; text-decoration: none; }
+        .logo-img { height: 48px; width: auto; object-fit: contain; transition: transform 0.2s ease; }
+        .logo-img:hover { transform: scale(1.03); }
+
+        .cart-container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #1f1f1f;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        }
+
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .cart-table th, .cart-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .cart-table th {
+            background-color: #2c3e50;
+            color: #f1c40f;
+        }
+
+        .cart-item-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .qty-btn-static {
+            background-color: #34495e;
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-delete-static {
+            background-color: #c0392b;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .cart-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #333;
+        }
+
+        .total-price {
+            font-size: 20px;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .cart-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-checkout {
+            background-color: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-continue {
+            background-color: #7f8c8d;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Khung thông báo Toast tĩnh */
+        #toast-notification {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #1a252f;
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 8px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+            font-size: 15px;
+            font-weight: 500;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+        }
+
+        #toast-notification.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <a href="index.html" class="logo-link">
+                <img src="img/logo.png" alt="Phát Đạt Quán Ăn Logo" class="logo-img">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="index.html#menu">Thực đơn</a></li>
+                <li><a href="cart.html">Giỏ hàng (<span id="cart-count">0</span>)</a></li>
+                <li id="auth-menu"><a href="login.html" id="login-btn">Đăng nhập / Đăng ký</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="cart-container">
+        <h2 style="color: #e74c3c; margin-bottom: 20px; text-align: center;">Giỏ Hàng Của Bạn</h2>
+
+        <div id="cart-content">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Hình ảnh</th>
+                        <th>Tên món</th>
+                        <th>Đơn giá</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><img src="img/1.jpg" alt="Bánh Tráng Trộn" class="cart-item-img"></td>
+                        <td style="font-weight: bold;">Bánh Tráng Trộn Sẵn 8 Ghiền</td>
+                        <td>25.000 VNĐ</td>
+                        <td>
+                            <button class="qty-btn-static">-</button>
+                            <span style="margin: 0 8px; font-weight: bold;">1</span>
+                            <button class="qty-btn-static">+</button>
+                        </td>
+                        <td style="color: #e74c3c; font-weight: bold;">25.000 VNĐ</td>
+                        <td><button class="btn-delete-static" id="btn-delete">Xóa</button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="cart-summary">
+                <div>
+                    <span>Tổng tiền thanh toán: </span>
+                    <span class="total-price">25.000 VNĐ</span>
+                </div>
+                <div class="cart-actions">
+                    <button id="btn-add-more" class="btn-continue">Thêm món khác</button>
+                    <button id="btn-checkout" class="btn-checkout">Tiến hành đặt hàng</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Hộp thông báo Toast tĩnh -->
+    <div id="toast-notification">Thông báo</div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <h3>Quán Ăn Phát Đạt</h3>
+            <p><strong>Địa chỉ:</strong> 273 Kinh Dương Vương, Phường Chợ Quán, TP. HCM</p>
+            <p><strong>Hotline:</strong> 0123 456 789</p>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Đồ án Lập trình Web - Nhóm 6969.</p>
+        </div>
+    </footer>
+
+    <!-- Script tĩnh đồng bộ Toast tại chỗ, không chuyển trang -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const btnCheckout = document.getElementById('btn-checkout');
+            const btnAddMore = document.getElementById('btn-add-more');
+            const btnDelete = document.getElementById('btn-delete');
+            const toast = document.getElementById('toast-notification');
+
+            function showToast(message) {
+                if (!toast) return;
+                toast.textContent = message;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2000);
+            }
+
+            // Nút Tiến hành đặt hàng: hiện "Đã đặt hàng" tại chỗ
+            if (btnCheckout) {
+                btnCheckout.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    showToast("Đã đặt hàng");
+                });
+            }
+
+            // Nút Thêm món khác: hiện "Đã thêm món" tại chỗ, đứng yên không dịch chuyển
+            if (btnAddMore) {
+                btnAddMore.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    showToast("Đã thêm món");
+                });
+            }
+
+            // Nút Xóa sản phẩm: hiện "Đã xóa món hàng" tại chỗ
+            if (btnDelete) {
+                btnDelete.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    showToast("Đã xóa món hàng");
+                });
+            }
+        });
+    </script>
+</body>
+</html>
