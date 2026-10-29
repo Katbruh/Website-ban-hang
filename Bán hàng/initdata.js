@@ -4,7 +4,7 @@ function initializeData() {
             {
                 id: "SP_01",
                 name: "Bánh Tráng Trộn Sẵn 8 Ghiền",
-                categoryId: "Khai vi",
+                categoryId: "Nhóm bánh tráng & món trộn",
                 price: 25000,
                 image: "img/1.jpg",
                 description: "Bánh tráng trộn đậm vị, đầy đủ topping khô bò, trứng cút, mỡ hành.",
@@ -13,25 +13,25 @@ function initializeData() {
             {
                 id: "SP_02",
                 name: "Cá Viên Chiên (1 Xiên / 4 Viên)",
-                categoryId: "Khai vi",
+                categoryId: "Nhóm đồ chiên, xiên que",
                 price: 5000,
-                image: "2.jpg",
+                image: "img/2.jpg",
                 description: "Cá viên chiên vàng giòn rụm, 1 xiên gồm 4 viên hấp dẫn.",
                 status: "active"
             },
             {
                 id: "SP_03",
                 name: "Kẹo Nhai Dynamite Chews (Gói)",
-                categoryId: "Khai vi",
+                categoryId: "Nhóm bánh & kẹo",
                 price: 25000,
-                image: "3.jpg",
+                image: "img/3.jpg",
                 description: "Kẹo nhai Sô-cô-la hương bạc hà, đóng gói tiện lợi.",
                 status: "active"
             },
             {
                 id: "SP_04",
                 name: "Que Cây Vfoods Hot Chilli (Gói)",
-                categoryId: "Khai vi",
+                categoryId: "Nhóm bánh & kẹo",
                 price: 15000,
                 image: "img/4.jpg",
                 description: "Bánh snack que cay Vfoods giòn rụm, vị cay ngọt hấp dẫn.",
@@ -40,9 +40,9 @@ function initializeData() {
             {
                 id: "SP_05",
                 name: "Xúc Xích Chiên (1 Cây)",
-                categoryId: "Khai vi",
+                categoryId: "Nhóm đồ chiên, xiên que",
                 price: 6000,
-                image: "5.jpg",
+                image: "img/5.jpg",
                 description: "Xúc xích chiên thơm ngon đậm đà, ăn kèm rau sống và tương ớt.",
                 status: "active"
             },
