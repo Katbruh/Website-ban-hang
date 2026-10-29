@@ -17,7 +17,7 @@
         <nav>
             <ul>
                 <li><a href="index.html">Trang chủ</a></li>
-                <li><a href="index.html#menu">Thực đơn</a></li>
+                <li><a href="menu.html">Thực đơn</a></li>
                 <li><a href="cart.html">Giỏ hàng (<span id="cart-count">0</span>)</a></li>
                 <li id="auth-menu"><a href="login.html" id="login-btn">Đăng nhập / Đăng ký</a></li>
             </ul>
@@ -26,56 +26,90 @@
 
     <!-- MAIN CONTENT -->
     <main>
-        <section class="banner">
-            <h2>Chào mừng đến với Quán Ăn Phát Đạt</h2>
-            <p>Hương vị đậm đà - Phục vụ tận tâm</p>
+        <!-- HERO BANNER (Dùng ảnh mẹt đồ ăn vặt img/0.jpg và nút dẫn sang menu.html) -->
+        <section class="hero-banner">
+            <div class="hero-content">
+                <h2>Món ăn vặt đậm vị cho bàn nhậu, mâm cơm và ăn vặt</h2>
+                <p>Bánh tráng, xiên que, trái cây lắc và đồ uống thơm ngon.</p>
+                <p>Mỗi món đều có mô tả chi tiết và giá cả rõ ràng.</p>
+                <a href="menu.html" class="hero-btn">Xem danh sách thực đơn</a>
+            </div>
+            <div class="hero-image-box">
+                <img src="img/0.jpg" alt="Mẹt đồ ăn vặt Phát Đạt" class="hero-img-arch">
+            </div>
         </section>
 
-        <section class="search-filter-section">
-            <input type="text" id="search-name" placeholder="Tìm tên món ăn...">
-            <select id="filter-category">
-                <option value="all">Tất cả danh mục</option>
-                <option value="M01">Nhóm bánh tráng & món trộn</option>
-                <option value="M02">Nhóm đồ chiên, xiên que</option>
-                <option value="M03">Nhóm trái cây lắc & ăn vặt khô</option>
-                <option value="M04">Nhóm bánh & kẹo</option>
-                <option value="M05">Nhóm giải khát</option>
-            </select>
-
-            <input type="text" id="min-price" placeholder="Giá từ..." list="min-price-list" autocomplete="off">
-            <datalist id="min-price-list">
-                <option value="0.000 VNĐ">
-                <option value="10.000 VNĐ">
-                <option value="20.000 VNĐ">
-                <option value="50.000 VNĐ">
-            </datalist>
-
-            <input type="text" id="max-price" placeholder="Đến giá..." list="max-price-list" autocomplete="off">
-            <datalist id="max-price-list">
-                <option value="50.000 VNĐ">
-                <option value="100.000 VNĐ">
-                <option value="200.000 VNĐ">
-                <option value="500.000 VNĐ">
-            </datalist>
-
-            <button id="btn-search">Tìm kiếm</button>
+        <!-- Khối Danh mục dạng thẻ nút bấm ngang -->
+        <section class="category-chips-section">
+            <h3 class="section-heading">Danh mục</h3>
+            <div class="category-chips-grid">
+                <a href="menu.html" class="chip-item">Nhóm bánh tráng & món trộn</a>
+                <a href="menu.html" class="chip-item">Nhóm đồ chiên, xiên que</a>
+                <a href="menu.html" class="chip-item">Nhóm trái cây lắc & ăn vặt khô</a>
+                <a href="menu.html" class="chip-item">Nhóm bánh & kẹo</a>
+                <a href="menu.html" class="chip-item">Nhóm giải khát</a>
+            </div>
         </section>
 
-        <section id="menu" class="menu-section">
-            <h3 class="section-title">Thực Đơn Của Chúng Tôi</h3>
-            <div id="product-list" class="product-grid"></div>
-            <div id="pagination" class="pagination-container"></div>
+        <!-- Khu vực Sản phẩm nổi bật -->
+        <section class="menu-section">
+            <div class="menu-header-row">
+                <h3 class="section-title-left">Sản phẩm nổi bật</h3>
+                <a href="menu.html" class="view-all-link">Xem tất cả</a>
+            </div>
+            
+            <div id="product-list" class="product-grid">
+                <!-- Sản phẩm render từ main.js -->
+            </div>
         </section>
     </main>
 
+    <!-- Hộp thông báo Toast tĩnh -->
     <div id="toast-notification">Thông báo</div>
 
+    <!-- FOOTER 4 CỘT CHUẨN MẪU -->
     <footer>
-        <div class="footer-content">
-            <h3>Quán Ăn Phát Đạt</h3>
-            <p><strong>Địa chỉ:</strong> 273 Kinh Dương Vương, Phường Chợ Quán, TP. HCM</p>
-            <p><strong>Hotline:</strong> 0123 456 789</p>
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="footer-logo-area">
+                    <img src="img/logo.png" alt="Logo" class="footer-logo-img">
+                    <span class="footer-title">Quán Ăn Phát Đạt</span>
+                </div>
+                <p class="footer-desc">Quán ăn vặt Phát Đạt chuyên cung cấp các món ăn vặt, xiên que, bánh tráng và đồ uống đậm vị, phục vụ tận tâm.</p>
+            </div>
+
+            <div class="footer-col">
+                <h3>Thông tin liên hệ</h3>
+                <ul class="footer-links">
+                    <li><strong>Địa chỉ:</strong> 273 Kinh Dương Vương, Phường Chợ Quán, TP. HCM</li>
+                    <li><strong>Điện thoại:</strong> 0123 456 789</li>
+                    <li><strong>Email:</strong> phatdatquan@gmail.com</li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Dòng sản phẩm</h3>
+                <ul class="footer-links">
+                    <li><a href="menu.html">Nhóm bánh tráng & món trộn</a></li>
+                    <li><a href="menu.html">Nhóm đồ chiên, xiên que</a></li>
+                    <li><a href="menu.html">Nhóm trái cây lắc & ăn vặt khô</a></li>
+                    <li><a href="menu.html">Nhóm bánh & kẹo</a></li>
+                    <li><a href="menu.html">Nhóm giải khát</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Chính sách</h3>
+                <ul class="footer-links">
+                    <li><a href="#" class="policy-link">Chính sách đổi trả</a></li>
+                    <li><a href="#" class="policy-link">Chính sách vận chuyển</a></li>
+                    <li><a href="#" class="policy-link">Chính sách bảo hành</a></li>
+                    <li><a href="#" class="policy-link">Chính sách thanh toán</a></li>
+                    <li><a href="#" class="policy-link">Chính sách bảo mật</a></li>
+                </ul>
+            </div>
         </div>
+
         <div class="footer-bottom">
             <p>&copy; 2026 Đồ án Lập trình Web - Nhóm 6969.</p>
         </div>
