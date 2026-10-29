@@ -6,11 +6,6 @@
     <title>Phát Đạt - Tài Khoản</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .logo { display: flex; align-items: center; }
-        .logo-link { display: inline-block; line-height: 0; text-decoration: none; }
-        .logo-img { height: 48px; width: auto; object-fit: contain; transition: transform 0.2s ease; }
-        .logo-img:hover { transform: scale(1.03); }
-
         .auth-container {
             max-width: 460px;
             margin: 40px auto;
@@ -95,49 +90,25 @@
             cursor: pointer;
             font-size: 16px;
         }
-
-        #toast-notification {
-            position: fixed;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #1a252f;
-            color: #ffffff;
-            padding: 14px 28px;
-            border-radius: 8px;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
-            font-size: 16px;
-            font-weight: 500;
-            z-index: 9999;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-        }
-
-        #toast-notification.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-        }
     </style>
 </head>
 <body>
     <!-- HEADER -->
     <header>
-    <div class="logo">
-        <a href="index.html" class="logo-link">
-            <img src="img/logo.png" alt="Phát Đạt Quán Ăn Logo" class="logo-img">
-        </a>
-    </div>
-    <nav>
-        <ul>
-            <li><a href="index.html">Trang chủ</a></li>
-            <li><a href="index.html#menu">Thực đơn</a></li>
-            <li><a href="cart.html">Giỏ hàng (<span id="cart-count">0</span>)</a></li>
-            <li id="auth-menu"><a href="login.html" id="login-btn">Đăng nhập / Đăng ký</a></li>
-        </ul>
-    </nav>
-</header>
+        <div class="logo">
+            <a href="index.html" class="logo-link">
+                <img src="img/logo.png" alt="Phát Đạt Quán Ăn Logo" class="logo-img">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="index.html#menu">Thực đơn</a></li>
+                <li><a href="cart.html">Giỏ hàng (<span id="cart-count">0</span>)</a></li>
+                <li id="auth-menu"><a href="login.html" id="login-btn">Đăng nhập / Đăng ký</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <!-- MAIN CONTENT -->
     <main>
@@ -204,10 +175,8 @@
         </div>
     </main>
 
-    <!-- Hộp thông báo Toast tĩnh -->
     <div id="toast-notification">Thông báo</div>
 
-    <!-- FOOTER -->
     <footer>
         <div class="footer-content">
             <h3>Quán Ăn Phát Đạt</h3>
@@ -219,7 +188,6 @@
         </div>
     </footer>
 
-    <!-- Script xử lý -->
     <script src="initdata.js"></script>
     <script>
         function switchTab(tabName) {
@@ -240,87 +208,6 @@
                 panelLogin.classList.remove('active');
             }
         }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const toast = document.getElementById('toast-notification');
-
-            function showToast(message) {
-                if (!toast) return;
-                toast.textContent = message;
-                toast.classList.add('show');
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 2000);
-            }
-
-            const btnLogin = document.getElementById('btn-login');
-            if (btnLogin) {
-                btnLogin.addEventListener('click', function () {
-                    const enteredUser = document.getElementById('login-username').value.trim();
-                    const enteredPass = document.getElementById('login-password').value.trim();
-
-                    if (!enteredUser || !enteredPass) {
-                        showToast("Vui lòng điền đầy đủ thông tin");
-                        return;
-                    }
-
-                    let users = JSON.parse(localStorage.getItem('users')) || [];
-                    const matchedUser = users.find(u => u.username === enteredUser && u.password === enteredPass);
-
-                    if (matchedUser) {
-                        localStorage.setItem('currentUser', JSON.stringify(matchedUser));
-                        showToast("Đăng nhập thành công");
-                    } else {
-                        showToast("Đăng nhập thất bại");
-                    }
-                });
-            }
-
-            const btnRegister = document.getElementById('btn-register');
-            if (btnRegister) {
-                btnRegister.addEventListener('click', function () {
-                    const username = document.getElementById('reg-username').value.trim();
-                    const phone = document.getElementById('reg-phone').value.trim();
-                    const gender = document.getElementById('reg-gender').value;
-                    const dob = document.getElementById('reg-dob').value;
-                    const password = document.getElementById('reg-password').value.trim();
-                    const confirmPass = document.getElementById('reg-confirm').value.trim();
-
-                    if (!username || !phone || !gender || !dob || !password || !confirmPass) {
-                        showToast("Vui lòng nhập đầy đủ thông tin");
-                        return;
-                    }
-
-                    if (password !== confirmPass) {
-                        showToast("Mật khẩu không khớp");
-                        return;
-                    }
-
-                    let users = JSON.parse(localStorage.getItem('users')) || [];
-                    const existing = users.find(u => u.username === username);
-
-                    if (existing) {
-                        showToast("Tên đăng nhập đã tồn tại");
-                    } else {
-                        users.push({
-                            id: "USER_" + Date.now(),
-                            username: username,
-                            phone: phone,
-                            gender: gender,
-                            dob: dob,
-                            password: password,
-                            role: "customer"
-                        });
-                        localStorage.setItem('users', JSON.stringify(users));
-                        showToast("Đăng ký thành công");
-
-                        setTimeout(() => {
-                            switchTab('login');
-                        }, 1500);
-                    }
-                });
-            }
-        });
     </script>
 </body>
 </html>
