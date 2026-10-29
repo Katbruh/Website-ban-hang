@@ -10,38 +10,74 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #f1f1f1;
     line-height: 1.6;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-/* Header */
+/* HEADER CHUẨN ĐỒNG BỘ 100% CHO MỌI TRANG */
 header {
     background-color: #C0392B;
     color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 40px;
+    height: 80px;
+    padding: 0 40px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
+    width: 100%;
 }
 
-header h1 {
-    font-size: 28px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+.logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    gap: 25px;
+    gap: 30px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
 nav a {
     color: #fff;
     text-decoration: none;
     font-weight: 600;
+    font-size: 15px;
     transition: color 0.3s ease;
 }
 
@@ -96,11 +132,12 @@ nav a:hover {
     background-color: #219150;
 }
 
-/* Danh sách sản phẩm (Lưới kề nhau) */
 .menu-section {
+    flex: 1;
     max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 20px;
 }
 
 .section-title {
@@ -120,7 +157,6 @@ input::placeholder {
     gap: 15px;
 }
 
-/* Từng thẻ sản phẩm */
 .product-card {
     background-color: #1e1e1e;
     border: 1px solid #2d2d2d;
@@ -186,21 +222,48 @@ input::placeholder {
     background-color: #219150;
 }
 
-/* Footer */
+/* Footer chuẩn */
 footer {
     background-color: #2C3E50;
     color: #ECF0F1;
     text-align: center;
-    padding: 30px 20px 15px 20px;
-    margin-top: 50px;
+    padding: 35px 20px 25px 20px;
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 footer h3 {
     color: #F1C40F;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    font-size: 18px;
 }
 
-/* Khung thông báo tĩnh (Toast Notification) khi bấm tìm kiếm */
+.footer-content p, 
+.footer-bottom p {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #BDC3C7;
+    text-align: center;
+}
+
+.footer-bottom {
+    margin-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    padding-top: 15px;
+}
+
+/* Toast Notification */
 #toast-notification {
     position: fixed;
     bottom: 40px;
