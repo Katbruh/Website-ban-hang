@@ -340,5 +340,16 @@
             });
         });
     </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lấy tổng số lượng sản phẩm từ localStorage (nếu không có thì mặc định là 0 hoặc 3 tùy ý bạn)
+        let count = localStorage.getItem('cart_count') || '0';
+        
+        // Cập nhật vào tất cả các thẻ có id="cart-count" trên header
+        document.querySelectorAll('#cart-count').forEach(el => {
+            el.textContent = count;
+        });
+    });
+</script>
 </body>
 </html>
