@@ -496,3 +496,70 @@ footer {
         height: 180px;
     }
 }
+/* THANH PHÂN TRANG TĨNH (PAGINATION) */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0 20px 0;
+    width: 100%;
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 8px;
+    background-color: transparent;
+}
+
+.pagination .page-item .page-link {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    color: #f1f1f1;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 50%;
+    border: 1px solid #333333;
+    background-color: #1f1f1f;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    user-select: none;
+}
+
+.pagination .page-item:first-child .page-link,
+.pagination .page-item:last-child .page-link {
+    border-radius: 20px;
+    padding: 0 16px;
+}
+
+.pagination .page-item:not(.disabled):not(.active) .page-link:hover {
+    background-color: #C0392B;
+    border-color: #C0392B;
+    color: #ffffff;
+}
+
+.pagination .page-item:not(.disabled) .page-link:active {
+    transform: scale(0.95);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #E74C3C;
+    color: #ffffff;
+    border-color: #E74C3C;
+    cursor: default;
+    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.4);
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #666666;
+    background-color: #161616;
+    border-color: #262626;
+    cursor: not-allowed;
+}
