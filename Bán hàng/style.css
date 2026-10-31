@@ -299,21 +299,70 @@ input::placeholder {
     gap: 20px;
 }
 
+/* Tinh chỉnh lại card sản phẩm và nút "Thêm vào giỏ" cho gọn gàng, đẹp mắt */
 .product-card {
-    background-color: #1e1e1e;
+    background-color: #1a1a1a;
     border: 1px solid #2d2d2d;
-    border-radius: 6px;
-    overflow: hidden;
+    border-radius: 8px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s, border-color 0.2s;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .product-card:hover {
     transform: translateY(-4px);
-    border-color: #E74C3C;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
 }
 
+.product-card .product-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.product-card h3 {
+    font-size: 15px;
+    color: #ffffff;
+    margin-bottom: 8px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.product-card .price {
+    font-size: 15px;
+    color: #e74c3c;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+/* Nút thêm vào giỏ nằm gọn trong khung, bo góc và có hiệu ứng hover */
+.product-card button, .add-to-cart-btn {
+    background-color: #27ae60 !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 10px 12px !important;
+    border-radius: 6px !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    display: block !important;
+    margin-top: auto !important;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.product-card button:hover, .add-to-cart-btn:hover {
+    background-color: #219150 !important;
+}
+
+.product-card button:active, .add-to-cart-btn:active {
+    transform: scale(0.98);
+}
 .product-img {
     width: 100%;
     height: 150px;
