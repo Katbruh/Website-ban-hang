@@ -110,8 +110,9 @@
         <nav>
             <ul>
                 <li><a href="index.html">Trang chủ</a></li>
-                <li><a href="index.html#menu">Thực đơn</a></li>
-                <li><a href="cart.html">Giỏ hàng (<span id="cart-count">0</span>)</a></li>
+                <li><a href="menu.html">Thực đơn</a></li>
+                <li><a href="cart.html" style="color: #F1C40F; font-weight: bold;">Giỏ hàng (<span id="cart-count">3</span>)</a></li>
+                <li><a href="orders.html">Lịch sử đơn hàng</a></li>
                 <li id="auth-menu"><a href="login.html" id="login-btn">Đăng nhập / Đăng ký</a></li>
             </ul>
         </nav>
@@ -134,29 +135,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><img src="img/1.jpg" alt="Bánh Tráng Trộn" class="cart-item-img"></td>
-                        <td style="font-weight: bold;">Bánh Tráng Trộn Sẵn 8 Ghiền</td>
-                        <td>25.000 VNĐ</td>
-                        <td>
-                            <button class="qty-btn-static">-</button>
-                            <span style="margin: 0 8px; font-weight: bold;">1</span>
-                            <button class="qty-btn-static">+</button>
-                        </td>
-                        <td style="color: #e74c3c; font-weight: bold;">25.000 VNĐ</td>
-                        <td><button class="btn-delete-static" id="btn-delete">Xóa</button></td>
-                    </tr>
+                    <!-- Render tự động từ cart.js -->
                 </tbody>
             </table>
 
             <div class="cart-summary">
                 <div>
                     <span>Tổng tiền thanh toán: </span>
-                    <span class="total-price">25.000 VNĐ</span>
+                    <span class="total-price">0 VNĐ</span>
                 </div>
                 <div class="cart-actions">
                     <button id="btn-add-more" class="btn-continue">Thêm món khác</button>
-                    <button id="btn-checkout" class="btn-checkout">Tiến hành đặt hàng</button>
+                    <button id="btn-checkout" class="btn-checkout">Thanh toán</button>
                 </div>
             </div>
         </div>
@@ -165,7 +155,7 @@
     <!-- Hộp thông báo Toast tĩnh -->
     <div id="toast-notification">Thông báo</div>
 
-    <!-- FOOTER 4 CỘT CHUẨN MẪU -->
+    <!-- FOOTER -->
     <footer>
         <div class="footer-container">
             <div class="footer-col">
@@ -188,11 +178,11 @@
             <div class="footer-col">
                 <h3>Dòng sản phẩm</h3>
                 <ul class="footer-links">
-                    <li><a href="index.html#menu">Nhóm bánh tráng & món trộn</a></li>
-                    <li><a href="index.html#menu">Nhóm đồ chiên, xiên que</a></li>
-                    <li><a href="index.html#menu">Nhóm trái cây lắc & ăn vặt khô</a></li>
-                    <li><a href="index.html#menu">Nhóm bánh & kẹo</a></li>
-                    <li><a href="index.html#menu">Nhóm giải khát</a></li>
+                    <li><a href="menu.html">Nhóm bánh tráng & món trộn</a></li>
+                    <li><a href="menu.html">Nhóm đồ chiên, xiên que</a></li>
+                    <li><a href="menu.html">Nhóm trái cây lắc & ăn vặt khô</a></li>
+                    <li><a href="menu.html">Nhóm bánh & kẹo</a></li>
+                    <li><a href="menu.html">Nhóm giải khát</a></li>
                 </ul>
             </div>
 
@@ -214,5 +204,16 @@
     </footer>
 
     <script src="cart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lấy tổng số lượng sản phẩm từ localStorage (nếu không có thì mặc định là 0 hoặc 3 tùy ý bạn)
+        let count = localStorage.getItem('cart_count') || '0';
+        
+        // Cập nhật vào tất cả các thẻ có id="cart-count" trên header
+        document.querySelectorAll('#cart-count').forEach(el => {
+            el.textContent = count;
+        });
+    });
+</script>
 </body>
 </html>
